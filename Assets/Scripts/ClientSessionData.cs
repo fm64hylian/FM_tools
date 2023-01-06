@@ -16,7 +16,7 @@ public class ClientSessionData : MonoBehaviour
     public List<FMInventoryItem> InventoryItems = new List<FMInventoryItem>();
     public List<FMInventorySlot> Slots = new List<FMInventorySlot>();
 
-    public int currencyCO;
+    public int currencyCA;
     public int currencyPC;
     static ClientSessionData instance;    
 

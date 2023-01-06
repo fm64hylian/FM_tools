@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroLoader.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: 7d83b12e1dc007540ac31015715abfef
+  - enabled: 1
     path: Assets/Scenes/Inventory.unity
     guid: 0ea517ff5bd9159408432e9505870e29
   m_configObjects: {}
