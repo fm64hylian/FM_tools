@@ -213,7 +213,7 @@ public class FMPlayFabInventory : MonoBehaviour
 
     static void StoreSlotsFromJson(JSONNode json)
     {
-        ClientSessionData.Instance.Slots.Clear();
+        FMClientSessionData.Instance.Slots.Clear();
         JSONNode userEquipmentJSONData = json;
         if (userEquipmentJSONData == null)
         {
@@ -231,7 +231,7 @@ public class FMPlayFabInventory : MonoBehaviour
             emptySlots.Add(emptySlot);
         }
 
-        ClientSessionData.Instance.Slots = emptySlots;
+        FMClientSessionData.Instance.Slots = emptySlots;
 
         //Asignandole al JSON La informacion de Playfab para comprara si cambia despues
         SlotJSON = json;
@@ -257,7 +257,7 @@ public class FMPlayFabInventory : MonoBehaviour
     {
         List<FMInventorySlot> updateSlots = new List<FMInventorySlot>();
 
-        List<FMInventorySlot> slots = ClientSessionData.Instance.Slots;
+        List<FMInventorySlot> slots = FMClientSessionData.Instance.Slots;
         for (int i = 0; i < SlotJSON.AsArray.Count; i++)
         {
             EquipmentSlotsType jsonSlotKey = GetSlotsName(SlotJSON[i]);

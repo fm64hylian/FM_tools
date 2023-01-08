@@ -37,7 +37,7 @@ public class FMInventorySlot : MonoBehaviour
         string instanceId = invItem != null ? invItem.InstanceID : "";
         //si parte con "Store", significa que no ha sido comprado aun
         CurrentItem = isInInventory ? instanceId : "Store_" + _item.ItemId;
-        FMInventorySlot clientSlot = ClientSessionData.Instance.Slots.Find(x => x.SlotType.Equals(SlotType));
+        FMInventorySlot clientSlot = FMClientSessionData.Instance.Slots.Find(x => x.SlotType.Equals(SlotType));
         clientSlot.CurrentItem = CurrentItem;
     }
 }

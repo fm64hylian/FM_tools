@@ -49,7 +49,7 @@ public class DisplayAchievementTest : MonoBehaviour
                 FMPlayfabUserAchievement.Instance.StoreItemsFromJson(result);
                 if (FMPlayfabUserAchievement.Items.Count != 0)
                 {
-                    ClientSessionData.Instance.UserAchievements = FMPlayfabUserAchievement.Items;
+                    FMClientSessionData.Instance.UserAchievements = FMPlayfabUserAchievement.Items;
                 }
 
                     //getting reward and achievement list

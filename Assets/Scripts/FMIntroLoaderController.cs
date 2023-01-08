@@ -40,8 +40,8 @@ public class FMIntroLoaderController : MonoBehaviour
             PlayFabId = logResult.PlayFabId
         }, result =>
         {
-            ClientSessionData.Instance.PlayfabID = logResult.PlayFabId;
-            ClientSessionData.Instance.UserName = result.AccountInfo.TitleInfo.DisplayName;
+            FMClientSessionData.Instance.PlayfabID = logResult.PlayFabId;
+            FMClientSessionData.Instance.UserName = result.AccountInfo.TitleInfo.DisplayName;
             labLoading.text = "... Loading user info ...";
             progress += 0.20f;
             total += progress;
@@ -54,8 +54,8 @@ public class FMIntroLoaderController : MonoBehaviour
                 int PC = 0;
                 resInventory.VirtualCurrency.TryGetValue("CA", out CA);
                 resInventory.VirtualCurrency.TryGetValue("PC", out PC);
-                ClientSessionData.Instance.currencyCA = CA;
-                ClientSessionData.Instance.currencyPC = PC;
+                FMClientSessionData.Instance.currencyCA = CA;
+                FMClientSessionData.Instance.currencyPC = PC;
 
                 //inventory
                 inventoryItems = resInventory.Inventory;
@@ -67,7 +67,7 @@ public class FMIntroLoaderController : MonoBehaviour
                 PlayfabUtils.Instance.GetPlayerStatistics(null, statRes =>
                 {
                     FMPlayfabUserStatistics.StoreItemsFromJson(statRes);
-                    ClientSessionData.Instance.Statistics = FMPlayfabUserStatistics.Items;
+                    FMClientSessionData.Instance.Statistics = FMPlayfabUserStatistics.Items;
                     labLoading.text = "... Loading User Statistics ...";
                     progress += 0.20f;
                     total += progress;
@@ -78,8 +78,8 @@ public class FMIntroLoaderController : MonoBehaviour
                         FMPlayfabAchievements.Instance.StoreItemsFromJson(titleRes);
                         FMPlayfabReward.StoreItemsFromJson(titleRes);
 
-                        ClientSessionData.Instance.Achievements = FMPlayfabAchievements.Items;
-                        ClientSessionData.Instance.Rewards = FMPlayfabReward.Items;
+                        FMClientSessionData.Instance.Achievements = FMPlayfabAchievements.Items;
+                        FMClientSessionData.Instance.Rewards = FMPlayfabReward.Items;
 
                         labLoading.text = "... Loading Title Data ...";
                         progress += 0.20f;
@@ -88,11 +88,11 @@ public class FMIntroLoaderController : MonoBehaviour
                         //get catalogItems
                         PlayFabClientAPI.GetCatalogItems(new GetCatalogItemsRequest(), catalogRes =>
                         {
-                            ClientSessionData.Instance.CatalogItems = catalogRes.Catalog;
+                            FMClientSessionData.Instance.CatalogItems = catalogRes.Catalog;
 
                             //crossing CatalogItem and ItemInstance items
                             FMPlayFabInventory.StoreItemsFromPlayfab(catalogRes.Catalog, inventoryItems);
-                            ClientSessionData.Instance.InventoryItems = FMPlayFabInventory.Items;
+                            FMClientSessionData.Instance.InventoryItems = FMPlayFabInventory.Items;
 
                             //get user equipped items (from ReadOnlyData)
                             PlayfabUtils.Instance.GetUserReadOnlyData(new List<string>() { "fm_user_equipment" },
@@ -112,7 +112,7 @@ public class FMIntroLoaderController : MonoBehaviour
 
                                             FMPlayFabInventory.StoreSlotsFromJson(slotRes);
 
-                                            Debug.Log("getting Equip slots for first time" + ClientSessionData.Instance.Slots.Count);
+                                            Debug.Log("getting Equip slots for first time" + FMClientSessionData.Instance.Slots.Count);
                                             SceneManager.LoadScene("Home", LoadSceneMode.Single);
 
                                         }, error => {

@@ -31,10 +31,10 @@ public class FMHomeController : MonoBehaviour
     }
 
     void DisplayInfo() {
-        labUser.text = ClientSessionData.Instance.UserName;
+        labUser.text = FMClientSessionData.Instance.UserName;
 
-        labCurrencyCA.text = ClientSessionData.Instance.currencyCA.ToString();
-        labCurrencyPC.text = ClientSessionData.Instance.currencyPC.ToString();
+        labCurrencyCA.text = FMClientSessionData.Instance.currencyCA.ToString();
+        labCurrencyPC.text = FMClientSessionData.Instance.currencyPC.ToString();
 
         //LOGIN BONUS            
         FMPlayfabLoginBonus.Instance.CheckLoginBonus();
@@ -48,7 +48,7 @@ public class FMHomeController : MonoBehaviour
             PlayFabId = res.PlayFabId
         }, result =>
         {
-            ClientSessionData.Instance.UserName = result.AccountInfo.TitleInfo.DisplayName;
+            FMClientSessionData.Instance.UserName = result.AccountInfo.TitleInfo.DisplayName;
             labUser.text = result.AccountInfo.TitleInfo.DisplayName;
         }, error => { Debug.Log("error on get account info"); });
 
@@ -61,15 +61,15 @@ public class FMHomeController : MonoBehaviour
             resInventory.VirtualCurrency.TryGetValue("PC", out PC);
             labCurrencyCA.text = CO.ToString();
             labCurrencyPC.text = PC.ToString();
-            ClientSessionData.Instance.currencyCA = CO;
-            ClientSessionData.Instance.currencyPC = PC;
+            FMClientSessionData.Instance.currencyCA = CO;
+            FMClientSessionData.Instance.currencyPC = PC;
         }
         , error => { Debug.Log("error on get currency info"); });
 
         //statistics
         PlayfabUtils.Instance.GetPlayerStatistics(null, statRes => {
             FMPlayfabUserStatistics.StoreItemsFromJson(statRes);
-            ClientSessionData.Instance.Statistics = FMPlayfabUserStatistics.Items;
+            FMClientSessionData.Instance.Statistics = FMPlayfabUserStatistics.Items;
         }, error => { Debug.Log("error on getting statistics"); });
 
         //getting reward and achievement list
@@ -77,10 +77,10 @@ public class FMHomeController : MonoBehaviour
             FMPlayfabAchievements.Instance.StoreItemsFromJson(titleRes);
             FMPlayfabReward.StoreItemsFromJson(titleRes);
 
-            ClientSessionData.Instance.Achievements = FMPlayfabAchievements.Items;
-            ClientSessionData.Instance.Rewards = FMPlayfabReward.Items;
-            Debug.Log("got achievments " + ClientSessionData.Instance.Achievements.Count);
-            Debug.Log("got rewards " + ClientSessionData.Instance.Rewards.Count);
+            FMClientSessionData.Instance.Achievements = FMPlayfabAchievements.Items;
+            FMClientSessionData.Instance.Rewards = FMPlayfabReward.Items;
+            Debug.Log("got achievments " + FMClientSessionData.Instance.Achievements.Count);
+            Debug.Log("got rewards " + FMClientSessionData.Instance.Rewards.Count);
 
             //LOGIN BONUS            
             FMPlayfabLoginBonus.Instance.CheckLoginBonus();
@@ -89,9 +89,9 @@ public class FMHomeController : MonoBehaviour
         //get catalogItems
         PlayFabClientAPI.GetCatalogItems(new GetCatalogItemsRequest(), catalogRes =>
         {
-            ClientSessionData.Instance.CatalogItems = catalogRes.Catalog;
+            FMClientSessionData.Instance.CatalogItems = catalogRes.Catalog;
             //DisplayUserItems(catalogRes.Catalog);
-            Debug.Log("got catalog"+ ClientSessionData.Instance.CatalogItems.Count);
+            Debug.Log("got catalog"+ FMClientSessionData.Instance.CatalogItems.Count);
         }
         , error => { Debug.Log("error on get catalog info"); });
 
@@ -176,6 +176,6 @@ public class FMHomeController : MonoBehaviour
     }
 
     public void GoTo3DPlayTest(){
-        SceneManager.LoadScene("3DPlayTest");
+        SceneManager.LoadScene("Test3D");
     }
 }

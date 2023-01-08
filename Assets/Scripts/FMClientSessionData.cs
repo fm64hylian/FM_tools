@@ -4,7 +4,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
-public class ClientSessionData : MonoBehaviour
+public class FMClientSessionData : MonoBehaviour
 {
     public string PlayfabID;
     public string UserName;
@@ -18,16 +18,16 @@ public class ClientSessionData : MonoBehaviour
 
     public int currencyCA;
     public int currencyPC;
-    static ClientSessionData instance;    
+    static FMClientSessionData instance;    
 
-    public static ClientSessionData Instance
+    public static FMClientSessionData Instance
     {
         get
         {
             if (instance == null)
             {
                 GameObject obj = new GameObject("ClientData");
-                instance = obj.AddComponent<ClientSessionData>();
+                instance = obj.AddComponent<FMClientSessionData>();
             }
             return instance;
         }
