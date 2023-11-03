@@ -145,10 +145,10 @@ public class FMPlayFabInventory : MonoBehaviour
     public static void CreateUserEquipment(Action<ExecuteCloudScriptResult> result, Action<PlayFabError> error)
     {
         List<string> slotsStrings = new List<string>();
-        int slots = System.Enum.GetValues(typeof(EquipmentSlotsType)).Length;
+        int slots = System.Enum.GetValues(typeof(FMEquipmentSlotsType)).Length;
         for (int i = 1; i < slots; i++)
         {
-            string slotType = System.Enum.GetValues(typeof(EquipmentSlotsType)).GetValue(i).ToString();
+            string slotType = System.Enum.GetValues(typeof(FMEquipmentSlotsType)).GetValue(i).ToString();
             slotsStrings.Add(slotType);
 
         }
@@ -177,6 +177,11 @@ public class FMPlayFabInventory : MonoBehaviour
 
         object args = new { slots = json.ToString() };
         PlayfabUtils.Instance.ExecuteCloudscript("SetEquipmentSlots", args, result, error);
+    }
+
+    public static CatalogItem GetCatalogItemFromID(string itemId)
+    {
+        return FMClientSessionData.Instance.CatalogItems.Find(x => x.ItemId.Equals(itemId));
     }
 
     public static FMInventoryItem GetInventoryItemFromCatalogID(CatalogItem cItem)
@@ -242,15 +247,15 @@ public class FMPlayFabInventory : MonoBehaviour
     /// </summary>
     /// <param name="userSlot"></param>
     /// <returns></returns>
-    static EquipmentSlotsType GetSlotsName(JSONNode userSlot)
+    static FMEquipmentSlotsType GetSlotsName(JSONNode userSlot)
     {
         //there's only 1 KeyValuePair in the Object but whatever
         foreach (KeyValuePair<string, JSONNode> kvp in userSlot.AsObject)
         {
             //convert String(value from Object) to EquipmentSlotsType
-            return (EquipmentSlotsType)System.Enum.Parse(typeof(EquipmentSlotsType), kvp.Key);
+            return (FMEquipmentSlotsType)System.Enum.Parse(typeof(FMEquipmentSlotsType), kvp.Key);
         }
-        return EquipmentSlotsType.None;
+        return FMEquipmentSlotsType.None;
     }
 
     public static List<FMInventorySlot> CheckClientSlotsChanges()
@@ -260,7 +265,7 @@ public class FMPlayFabInventory : MonoBehaviour
         List<FMInventorySlot> slots = FMClientSessionData.Instance.Slots;
         for (int i = 0; i < SlotJSON.AsArray.Count; i++)
         {
-            EquipmentSlotsType jsonSlotKey = GetSlotsName(SlotJSON[i]);
+            FMEquipmentSlotsType jsonSlotKey = GetSlotsName(SlotJSON[i]);
             Debug.Log("slot Type "+jsonSlotKey.ToString());
             Debug.Log("slots " + slots.Count);
             FMInventorySlot slot = slots.Find(x => x.SlotType.Equals(jsonSlotKey));
@@ -275,6 +280,25 @@ public class FMPlayFabInventory : MonoBehaviour
         }
 
         return updateSlots;
+    }
+
+    public static FMEquipmentSlotsType GetSlotType(CatalogItem cItem)
+    {
+        if (cItem == null || cItem.Tags.Count == 0)
+        {
+            return FMEquipmentSlotsType.None;
+        }
+
+        FMEquipmentSlotsType[] slots = (FMEquipmentSlotsType[])System.Enum.GetValues(typeof(FMEquipmentSlotsType));
+        for (int i = 1; i < slots.Length; i++)
+        {
+            string slot = cItem.Tags.Find(x => x.Equals(slots[i].ToString()));
+            if (!string.IsNullOrEmpty(slot))
+            {
+                return slots[i];
+            }
+        }
+        return FMEquipmentSlotsType.None;
     }
 
     //TODO make one for favorites as well

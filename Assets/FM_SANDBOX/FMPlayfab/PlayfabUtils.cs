@@ -56,12 +56,12 @@ public class PlayfabUtils : MonoBehaviour
         PlayFabClientAPI.GetTitleData(request, onCallBack, onError);
     }
 
-    public void PurhaseItem(CatalogItem item, string vc, Action<PurchaseItemResult> onPurchase, Action<PlayFabError> onError) {
+    public void PurchaseItem(CatalogItem item, string vc, Action<PurchaseItemResult> onPurchase, Action<PlayFabError> onError) {
         uint price;
         item.VirtualCurrencyPrices.TryGetValue(vc, out price);
         var request = new PurchaseItemRequest()
         {
-            CatalogVersion = "Main Catalog",
+            CatalogVersion = "MainCatalog",
             ItemId = item.ItemId,
             Price =(int)price,
             VirtualCurrency = vc

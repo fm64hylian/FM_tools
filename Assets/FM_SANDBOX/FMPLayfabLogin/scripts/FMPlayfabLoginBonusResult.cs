@@ -40,7 +40,7 @@ public class FMPlayfabLoginBonusResult
             return;
         }
 
-        //get logi_count statistic
+        //get login_count statistic
         logCountStatistic = FMPlayfabUserStatistics.GetStatisticProgress("login_count");
 
         RemainingHours = jsonResult["remainingHour"] == null ? 0 : jsonResult["remainingHour"].AsInt;

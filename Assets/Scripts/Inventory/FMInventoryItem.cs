@@ -21,7 +21,7 @@ public class FMInventoryItem
     public bool IsFavorite;    
     public bool IsEquipped;
     //exclusive to equipment items
-    public EquipmentSlotsType SlotType;
+    public FMEquipmentSlotsType SlotType;
 
     public FMInventoryItem() {
 
@@ -37,7 +37,7 @@ public class FMInventoryItem
 
     public void AssignEquipmentSlotType()
     {
-        EquipmentSlotsType[] slots = (EquipmentSlotsType[])System.Enum.GetValues(typeof(EquipmentSlotsType));
+        FMEquipmentSlotsType[] slots = (FMEquipmentSlotsType[])System.Enum.GetValues(typeof(FMEquipmentSlotsType));
         for (int i = 1; i < slots.Length; i++)
         {
             string slot = Tags.Find(x => x.Equals(slots[i].ToString()));

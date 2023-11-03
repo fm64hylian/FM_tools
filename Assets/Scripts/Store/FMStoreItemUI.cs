@@ -15,21 +15,36 @@ public class FMStoreItemUI : MonoBehaviour
     TextMeshProUGUI pricePC;
 
     public Action<FMStoreItemUI> OnSelected;
+    
+    public string ItemID;
+    public string Title;
+    public string Description;
+    public string ImageUrl;
+    public int CA = -1;
+    public int PC = -1;
     bool isSelected = false;
+
     void Start()
     {
         
     }
 
-    public void SetData(string imageUrl, int caPrice, int pcPrice) {
-        Sprite sprite = Resources.Load<Sprite>("Textures/Inventory/" + imageUrl);
+    public void SetData(string itemID, string title, string description, string imageUrl, uint caPrice, uint pcPrice) {
+        ItemID = itemID;
+        Title = title;
+        Description = description;
+        ImageUrl = imageUrl;
+        CA = (int)caPrice;
+        PC = (int)pcPrice;
+
+        Sprite sprite = Resources.Load<Sprite>("Textures/Inventory/" + ImageUrl+ itemID);
         itemImage.sprite = sprite;
 
-        bool hasCA = caPrice > 0;
-        bool hasPC = pcPrice > 0;
+        bool hasCA = CA > 0;
+        bool hasPC = PC > 0;
 
-        priceCA.text = hasCA ? caPrice.ToString() : "--";
-        pricePC.text = hasPC ? caPrice.ToString() : "--";
+        priceCA.text = hasCA ? CA.ToString() : "--";
+        pricePC.text = hasPC ? PC.ToString() : "--";
     }
 
     public void OnItemSelected()
