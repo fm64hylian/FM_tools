@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
 using PlayFab.ClientModels;
+using System.Xml;
+using System.Linq;
 
 public enum FMRewardType
 {
@@ -46,6 +48,11 @@ public class FMRewardItem
     /// <returns></returns>
     public string GetValue()
     {
+        Debug.Log("ON REWARD getValue Start");
+        Debug.Log(FMRewardType.Currency);
+        Debug.Log(Amount.ToString());
+        Debug.Log(ItemKey);
+
         return Type == FMRewardType.Currency ? Amount.ToString() : ItemKey;
     }
 }
@@ -57,13 +64,21 @@ public class FMPlayfabReward : MonoBehaviour
     public static void StoreItemsFromJson(GetTitleDataResult res)
     {
         Items.Clear();
+        //Debug.Log("getting fm_rewards");
+        //Debug.Log(res.Data["fm_rewards"]);
+
         var allRewardsJson = JSON.Parse(res.Data["fm_rewards"]);
 
         for (int i = 0; i < allRewardsJson.Count; i++)
         {
             var reward = allRewardsJson[i];
+            //there's 2 reward_types: currency ("co" or "pc") and item ("item")
             FMRewardType type = reward["item_key"] == null ? FMRewardType.Currency : FMRewardType.Item;
+
+            //only "co"/"pc" reward_type will have amount
             int amount = type == FMRewardType.Currency ? reward["amount"].AsInt : 0;
+
+            //only "item" reward_type will have a "catalog" and "item_key"
             string itemKey = type == FMRewardType.Item ? reward["item_key"].Value : "";
             var ri = new FMRewardItem(reward["key"], reward["reward_type"], amount, itemKey, type);
             Items.Add(ri);

@@ -70,6 +70,15 @@ public class PlayfabUtils : MonoBehaviour
         PlayFabClientAPI.PurchaseItem(request, onPurchase, onError);
     }
 
+    /// <summary>
+    /// will Debug.Log() a json result from playfab
+    /// </summary>
+    public void PrintPlayfabObject(string preText, object jsonResult) {
+        string jsonDump = PlayFab.PluginManager.GetPlugin<ISerializerPlugin>(PluginContract.PlayFab_Serializer).SerializeObject(jsonResult);
+        Debug.Log(preText+ " - " + jsonDump);
+    }
+
+
     //////////////////////
     // CLOUDSCRIPS      //
     //////////////////////

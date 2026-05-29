@@ -144,19 +144,39 @@ public class FMPlayFabInventory : MonoBehaviour
     /// <param name="error"></param>
     public static void CreateUserEquipment(Action<ExecuteCloudScriptResult> result, Action<PlayFabError> error)
     {
-        List<string> slotsStrings = new List<string>();
-        int slots = System.Enum.GetValues(typeof(FMEquipmentSlotsType)).Length;
-        for (int i = 1; i < slots; i++)
+        // 1. Create a structured JSON arya instead of List<string>();
+        JSONArray slotsJson = new JSONArray();
+        int slotsCount = System.Enum.GetValues(typeof(FMEquipmentSlotsType)).Length;
+
+        for (int i = 1; i < slotsCount; i++)
         {
             string slotType = System.Enum.GetValues(typeof(FMEquipmentSlotsType)).GetValue(i).ToString();
-            slotsStrings.Add(slotType);
 
+            JSONObject slotObt = new JSONObject();
+            slotObt[slotType] = "None";
+
+            slotsJson.Add(slotObt);
         }
-        object args = new { slots = slotsStrings };
-        for (int i = 0; i < slotsStrings.Count; i++)
-        {
-            Debug.Log("args " + i + ": " + slotsStrings[i]);
-        }
+
+        // 2. Convert the entire array to a serialized string format
+        // This perfectly generates your target string: [{"Head_Hair":"None"},{"Head_UpperFace":"None"},...]
+        var args = new { slots = slotsJson.ToString() };
+
+        Debug.Log("[CreateUserEquipment] Sending perfectly formatted JSON Array string: " + slotsJson.ToString());
+
+        //List<string> slotsStrings = new List<string>();
+        //int slots = System.Enum.GetValues(typeof(FMEquipmentSlotsType)).Length;
+        //for (int i = 1; i < slots; i++)
+        //{
+        //    string slotType = System.Enum.GetValues(typeof(FMEquipmentSlotsType)).GetValue(i).ToString();
+        //    slotsStrings.Add(slotType);
+
+        //}
+        //object args = new { slots = slotsStrings };
+        //for (int i = 0; i < slotsStrings.Count; i++)
+        //{
+        //    Debug.Log("args " + i + ": " + slotsStrings[i]);
+        //}
         PlayfabUtils.Instance.ExecuteCloudscript("SetEquipmentSlots", args, result, error);
     }
 
@@ -209,6 +229,7 @@ public class FMPlayFabInventory : MonoBehaviour
 
     public static void StoreSlotsFromJson(ExecuteCloudScriptResult res)
     {
+        PlayfabUtils.Instance.PrintPlayfabObject("StoreSlotsfrom Json", res); //res.FunctionResult is null
         if (JSON.Parse(res.FunctionResult.ToString())["status"] != null)
         {
             JSONNode userEquipmentJSONData = JSON.Parse(res.FunctionResult.ToString())["userEquipment"];

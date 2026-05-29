@@ -28,10 +28,12 @@ public class FMPlayfabLoginBonusResult
            FilterResult(res);
     }
 
+    //TODO chec why loginBonusRewardsa are failing
     public void FilterResult(ExecuteCloudScriptResult result)
     {
         Bonuses.Clear();
         //Debug.Log(PlayFabSimpleJson.SerializeObject(result.FunctionResult));
+        //Debug.Log(result.FunctionResult.ToString());
         JSONNode jsonResult = JSON.Parse(result.FunctionResult.ToString());
         //Debug.Log(jsonResult);
         if ((jsonResult.Value.Equals("null") || result.Error != null))
@@ -40,11 +42,12 @@ public class FMPlayfabLoginBonusResult
             return;
         }
 
+
         //get login_count statistic
         logCountStatistic = FMPlayfabUserStatistics.GetStatisticProgress("login_count");
 
         RemainingHours = jsonResult["remainingHour"] == null ? 0 : jsonResult["remainingHour"].AsInt;
-        int logCount = jsonResult["login_count"] == null ? logCountStatistic : jsonResult["login_count"].AsInt; ;
+        int logCount = jsonResult["login_count"] == null ? logCountStatistic : jsonResult["login_count"].AsInt;
 
         //if there's daily bonus
         string dailyRewardKey = jsonResult["daily_reward"];
@@ -72,6 +75,7 @@ public class FMPlayfabLoginBonusResult
                 state = FMLoginBonusState.Unclaimed;
             }
             Bonuses.Add(new FMLoginBonusItem(i, reward, state));
+            //Debug.Log("adding bonus to Bonuses list" + Bonuses[i].Reward.Key);
             //var ri = new FMRewardItem(rewardKey, rewardType, rewardValue, rewardValue);
             //ClaimedRewards.Add(ri);
         }

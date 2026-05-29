@@ -8,6 +8,7 @@ using System;
 public class FMPlayfabLogin : MonoBehaviour
 {
     public static void LoginCustomID(string customId, Action<LoginResult> OnLoginSuccess) {
+        Debug.Log("trying to login for title "+ PlayFabSettings.TitleId+ " using custom id "+ customId);
         LoginCustomID(PlayFabSettings.TitleId, customId, OnLoginSuccess, OnLoginFailure);
     }
 

@@ -22,11 +22,14 @@ public class FMHomeController : MonoBehaviour
     void Start(){
         //var request = new LoginWithCustomIDRequest { CustomId = "64646464", CreateAccount = false };
         //PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
-        FMPlayfabLoginBonus.Instance.OnResult = DisplayLoginBuses;
+
         if (!FMPlayfabLogin.IsClientLoggedIn()) {
+            Debug.Log("tets user not logged, logging in...");
             FMPlayfabLogin.LoginCustomID("64646464", OnLoginSuccess);
             return;
         }
+
+        FMPlayfabLoginBonus.Instance.OnResult = DisplayLoginBonuses;
         DisplayInfo();
     }
 
@@ -112,7 +115,12 @@ public class FMHomeController : MonoBehaviour
         //}, OnLoginFailure);
     }
 
-    void DisplayLoginBuses(FMPlayfabLoginBonusResult result) {
+    void DisplayLoginBonuses(FMPlayfabLoginBonusResult result) {
+        PlayfabUtils.Instance.PrintPlayfabObject("login bonus result", result);
+
+        //clear default loguinUI
+        clearContainer(loginBonus.transform);
+
         for (int i = 0; i < result.Bonuses.Count; i++) {
             FMLoginBonusItem item = result.Bonuses[i];
             GameObject achievementPrefab = Instantiate(Resources.Load("FMLoginBonusItemUI")) as GameObject;
@@ -120,8 +128,10 @@ public class FMHomeController : MonoBehaviour
 
             itemUI.SetData(item);
 
-            itemUI.gameObject.transform.parent = loginBonus.transform;
+            //itemUI.gameObject.transform.parent = loginBonus.transform;
+            itemUI.gameObject.transform.SetParent(loginBonus.transform, false);
             itemUI.gameObject.transform.localScale = Vector3.one;
+            itemUI.gameObject.transform.localPosition = Vector3.zero;
         }
 
         //loginBonus.Reposition();
@@ -154,7 +164,17 @@ public class FMHomeController : MonoBehaviour
 
     }
 
+    void clearContainer(Transform content)
+    {
+        if (content == null) return;
 
+        // Loop backward from the last child down to index 0
+        for (int i = content.childCount - 1; i >= 0; i--)
+        {
+            Transform child = content.GetChild(i);
+            Destroy(child.gameObject);
+        }
+    }
     public void GoToAchievements(){
         SceneManager.LoadScene("PlayfabAchivements");
     }

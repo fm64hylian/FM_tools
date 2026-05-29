@@ -7,6 +7,9 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/IntroLoader.unity
+    guid: 91f8520d2f534f740bc375c234cd733c
+  - enabled: 1
+    path: Assets/Scenes/IntroLoaderOnline.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Home.unity
@@ -21,3 +24,4 @@ EditorBuildSettings:
     path: Assets/Scenes/Test3D.unity
     guid: 324c483d7949e284fb0d071cfbb77e04
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

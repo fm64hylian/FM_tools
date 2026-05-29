@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class FMInventoryController : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
 
 
     void Start()
