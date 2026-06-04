@@ -1293,8 +1293,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2121950240}
-        m_TargetAssemblyTypeName: FMHomeController, Assembly-CSharp
+      - m_Target: {fileID: 2121950242}
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
         m_MethodName: GoToStore
         m_Mode: 1
         m_Arguments:
@@ -1501,7 +1501,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 741791982}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2121950242}
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
+        m_MethodName: GoToBuilderTest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &741791982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1760,7 +1772,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 873165903}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999696
+  m_Size: 0.9999973
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3281,8 +3293,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2121950240}
-        m_TargetAssemblyTypeName: FMHomeController, Assembly-CSharp
+      - m_Target: {fileID: 2121950242}
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
         m_MethodName: GoTo3DPlayTest
         m_Mode: 1
         m_Arguments:
@@ -3952,7 +3964,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1587185346}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2121950242}
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
+        m_MethodName: GoToStageBuilder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1587185346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4031,7 +4055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0009521157}
+  m_AnchoredPosition: {x: 0, y: 0.0008824845}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1589185210
@@ -4156,8 +4180,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2121950240}
-        m_TargetAssemblyTypeName: FMHomeController, Assembly-CSharp
+      - m_Target: {fileID: 2121950242}
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
         m_MethodName: GoToInventory
         m_Mode: 1
         m_Arguments:
@@ -5128,6 +5152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2121950241}
   - component: {fileID: 2121950240}
+  - component: {fileID: 2121950242}
   m_Layer: 0
   m_Name: homeController
   m_TagString: Untagged
@@ -5167,6 +5192,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2121950242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121950239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed4beb51bd35134189f777f7329b30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FMSceneManager
 --- !u!1001 &2141160786
 PrefabInstance:
   m_ObjectHideFlags: 0

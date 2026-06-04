@@ -349,7 +349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stage Builder
+  m_text: Dashboard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1442,8 +1442,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1811964597}
-        m_TargetAssemblyTypeName: FMIntroController, Assembly-CSharp
-        m_MethodName: LoadStageBuilder
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
+        m_MethodName: GoToStageBuilder
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2622,9 +2622,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1811964594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ebf260be6667145bd56a22be4f7e43, type: 3}
+  m_Script: {fileID: 11500000, guid: eed4beb51bd35134189f777f7329b30d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FMIntroController
+  m_EditorClassIdentifier: Assembly-CSharp::FMSceneManager
 --- !u!1 &1835605322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2710,8 +2710,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1811964597}
-        m_TargetAssemblyTypeName: FMIntroController, Assembly-CSharp
-        m_MethodName: LoadStageTester
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
+        m_MethodName: GoToBuilderTest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2934,7 +2934,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1811964597}
-        m_TargetAssemblyTypeName: FMIntroController, Assembly-CSharp
+        m_TargetAssemblyTypeName: FMSceneManager, Assembly-CSharp
         m_MethodName: LoadOnlineIntroLoader
         m_Mode: 1
         m_Arguments:

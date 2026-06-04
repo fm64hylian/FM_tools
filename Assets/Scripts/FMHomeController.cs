@@ -175,27 +175,5 @@ public class FMHomeController : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
-    public void GoToAchievements(){
-        SceneManager.LoadScene("PlayfabAchivements");
-    }
 
-    public void GoToStore(){
-        SceneManager.LoadScene("Store");
-    }
-
-    public void GoToInventory(){
-        SceneManager.LoadScene("Inventory");
-    }
-
-    public void GoToStageBuilder() {
-        SceneManager.LoadScene("StageBuilder");
-    }
-
-    public void GoToBuilderTest() {
-        SceneManager.LoadScene("BuilderTest");
-    }
-
-    public void GoTo3DPlayTest(){
-        SceneManager.LoadScene("Test3D");
-    }
 }

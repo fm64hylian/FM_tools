@@ -4,10 +4,19 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
+/// <summary>
+/// use to decided wether playfab is being used or not
+/// </summary>
+public enum FMInternalMode { 
+    OffLine,
+    OnLine
+}
+
 public class FMClientSessionData : MonoBehaviour
 {
     public string PlayfabID;
     public string UserName;
+    public FMInternalMode InternalMode = FMInternalMode.OffLine;
     public List<FMUserStatistic> Statistics = new List<FMUserStatistic>();
     public List<FMAchievementItem> Achievements = new List<FMAchievementItem>();
     public List<FMUserAchievement> UserAchievements = new List<FMUserAchievement>();
